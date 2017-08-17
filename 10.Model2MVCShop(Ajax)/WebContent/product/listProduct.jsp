@@ -78,7 +78,7 @@
 					 		
 					 		value="";
 					 		
-					 		if(${param.menu=='manage'}){
+					 		if(${param.menu=="manage"}){
 								value="상품수정";
 							}else{
 								value="구매";
