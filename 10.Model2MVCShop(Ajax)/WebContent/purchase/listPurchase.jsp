@@ -19,9 +19,8 @@
 	} 
 	
 	$(function(){
-	 	 $(".ct_list_pop:contains('정보수정하기')").on("click",function(){
-	 		/*  self.location="/purchase/getPurchase?tranNo="+$("p"[0],this).text().trim()+"&prodNo="+$("p"[1],this).text().trim(); */
-	 		  self.location="/purchase/getPurchase?tranNo="+$("p"[0],this).text().trim()+"&prodNo="
+	 	 $(".ct_list_pop td:contains('정보수정하기')").on("click",function(){
+	 		  self.location="/purchase/getPurchase?tranNo="+$($("p")[0],this).text().trim()+"&prodNo="
 	 				  +$("span",this).text().trim();
 	 		console.log("수정찌금"+ $(this).html());
 	 	 });

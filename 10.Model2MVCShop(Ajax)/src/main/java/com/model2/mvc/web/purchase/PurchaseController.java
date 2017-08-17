@@ -132,13 +132,14 @@ public class PurchaseController {
 	}
 
 	@RequestMapping("updatePurchase")
-	public String updatePurchase(@ModelAttribute("purchase") Purchase purchase, @RequestParam("tranNo") int tranNo,
+	public String updatePurchase(@ModelAttribute("purchase") Purchase purchase,
 			HttpServletRequest request, Model model) throws Exception {
 
 		System.out.println("/updatePurchase");
-
+		
+		
 		purchase.setDivyDate(purchase.getDivyDate().replaceAll("-", ""));
-
+		
 		User user = (User) request.getSession().getAttribute("user");
 
 		purchase.setBuyer(user);

@@ -15,7 +15,7 @@ function fncPurchase(){
 }
 
 $(function(){
-	$("ct_btn01:contains('확인')").on("click",function(){
+	$(".ct_btn01:contains('확인')").on("click",function(){
 		fncPurchase();
 		
 	});

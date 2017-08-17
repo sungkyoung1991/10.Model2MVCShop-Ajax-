@@ -33,7 +33,7 @@
 				//alert(  $( "td.ct_btn01:contains('검색')" ).html() );
 				fncGetUserList(1);
 			});
-			
+			fd
 			
 			//==> userId LINK Event 연결처리
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)

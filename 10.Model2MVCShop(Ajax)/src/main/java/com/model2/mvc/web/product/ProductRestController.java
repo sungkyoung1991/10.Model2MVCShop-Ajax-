@@ -1,18 +1,18 @@
 package com.model2.mvc.web.product;
 
-import java.util.HashMap;
+import java.io.File;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.model2.mvc.common.Page;
@@ -40,35 +40,43 @@ public class ProductRestController {
 	int pageSize;
 
 	@RequestMapping(value = "json/addProduct", method = RequestMethod.POST)
-	public Product addProduct(@RequestBody Product product) throws Exception{
+	public Product addProduct(@RequestBody Product product, @RequestParam("file") MultipartFile file) throws Exception{
 		System.out.println("json/addProduct........");
+		if(file.getSize()>0){
+			product.setManuDate(product.getManuDate().replaceAll("-", ""));
+			String temDir ="/Users/sungkyoung-kim/git/10.Model2MVCShop(Ajax)/10.Model2MVCShop(Ajax)/WebContent/images/uploadFiles";
+			File UploadedFile = new File(temDir, file.getOriginalFilename());
+			product.setFileName(file.getOriginalFilename());
+			file.transferTo(UploadedFile);
+			productService.addProduct(product);
+			return product;
+			}else{
+				product.setManuDate(product.getManuDate().replaceAll("-", ""));
+				productService.addProduct(product);
+				return product;
+				
+			}
+			
+		}
 		
-		System.out.println("product..........." + product);
-		
-		
-		productService.addProduct(product);
-		
-		System.out.println("after product.......... " + product);
-		
-		return product;
-	}
-	@RequestMapping( value="json/getProduct/{value}", method=RequestMethod.GET )
-	public Map getProduct(@PathVariable int value) throws Exception{
+	@RequestMapping( value="json/getProduct/{prodNo}/{menu}", method=RequestMethod.GET )
+	public Product getProduct(@PathVariable int prodNo, @PathVariable String menu) throws Exception{
 		
 		System.out.println("/product/json/getProduct : GET");
 		
+		System.out.println("prodNo......" + prodNo);
+		System.out.println("menu......" + menu);
+		
 		Product returnProduct = new Product();
 		
-		returnProduct=productService.getProduct(value);
-		
-		returnProduct.setProdName("¼º°æ");
+		returnProduct=productService.getProduct(prodNo);
 		
 		System.out.println("returnProduct............."+returnProduct);
 		
-		Map map = new HashMap();
-		map.put("product", returnProduct);
+//		Map map = new HashMap();
+//		map.put("product", returnProduct);
 		
-		return map;
+		return returnProduct;
 	}
 
 	@RequestMapping(value = "json/updateProductView", method = RequestMethod.GET)

@@ -20,17 +20,18 @@
 
 function fncUpdatePurchase(){
 	
-	$('form').atttr("method","post").attr("action","/purchase/updatePurchase").submit();
+	$('form').attr("method","post").attr("action","/purchase/updatePurchase").submit();
 }
 
 $(function(){
-	$("ct_btn01:contains('수정')").on("click",function(){
+	$(".ct_btn01:contains('수정')").on("click",function(){
+		console.log("수정 .... : " + $(this).html());
 		fncUpdatePurchase();
 	});
 });
 
 $(function(){
-	$("ct_btn01:contains('취소')").on("click",function(){
+	$(".ct_btn01:contains('취소')").on("click",function(){
 		history.go(01);
 	});
 });
