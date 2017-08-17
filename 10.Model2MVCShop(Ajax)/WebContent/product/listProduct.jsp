@@ -29,53 +29,103 @@
 		 			 	 self.location="/product/getProduct?prodNo="+$("p",this).text().trim()+"&menu=${param.menu}"; 
 			}); 
 		 }); */
-		 
+	/* 	 
 		 $(function(){
-			 
-		
 		 
-		 $( ".ct_list_pop td:nth-child(2)" ).on("click" , function() {
-			 
-			 		var prodNo=$("p",this).text().trim();
-			 		
-				/* alert(  $( this ).text().trim() ); */
-				$.ajax( 
-						{
-							url : "/product/json/getProduct/"+prodNo+"/${param.menu}",
-							method : "GET" ,
-							dataType : "json" ,
-							headers : {
-								"Accept" : "application/json",
-								"Content-Type" : "application/json"
-							},
-							success : function(JSONData , status) {
-
-								//Debug...
-								/* alert(status); */
-								//Debug...
-								/* alert("JSONData : \n"+JSONData); */
+			 $( ".ct_list_pop td:nth-child(2)" ).on("click" , function() {
+				 
+				 		var prodNo=$("p",this).text().trim();
+				 		
+					$.ajax( 
+							{
+								url : "/product/json/getProduct/"+prodNo+"/${param.menu}",
+								method : "GET" ,
+								dataType : "json" ,
+								headers : {
+									"Accept" : "application/json",
+									"Content-Type" : "application/json"
+								},
 								
-								var displayValue = "<h3>"
-															+"상품번호 : "+JSONData.prodNo+"<br/>"
-															+"상품명 : "+JSONData.prodName+"<br/>"
-															+"상품이미지 : "+JSONData.fileName+"<br/>"
-															+"상세정보 : "+JSONData.prodDetail+"<br/>"
-															+"제조일자 : "+JSONData.manuDate+"<br/>"
-															+"가격 : "+JSONData.price+"<br/>"
-															+"등록일자 : "+JSONData.regDate+"<br/>"
-															+"</h3>";
-								//Debug...									
-								//alert(displayValue);
-								$("h3").remove();
-								 $("#"+prodNo+"").html(displayValue); 
-							
+								success : function(JSONData , status) {
+	
+									var displayValue = "<h3>"
+																+"상품번호 : "+JSONData.prodNo+"<br/>"
+																+"상품명 : "+JSONData.prodName+"<br/>"
+																+"상품이미지 : "+JSONData.fileName+"<br/>"
+																+"상세정보 : "+JSONData.prodDetail+"<br/>"
+																+"제조일자 : "+JSONData.manuDate+"<br/>"
+																+"가격 : "+JSONData.price+"<br/>"
+																+"등록일자 : "+JSONData.regDate+"<br/>"
+																+"</h3>";
+									//Debug...									
+									//alert(displayValue);
+									$("h3").remove();
+									 $("#"+prodNo+"").html(displayValue); 
+								
+								}
+						});
+			 });
+			 });
+		  */
+		  
+		  
+		   	 
+			 $(function(){
+			 
+				 $( ".ct_list_pop td:nth-child(2)" ).on("click" , function() {
+					 
+					 		var prodNo=$("p",this).text().trim();
+					 		
+					 		value="";
+					 		
+					 		if(${param.menu=='manage'}){
+								value="상품수정";
+							}else{
+								value="구매";
 							}
-					});
-		 });
-		 });
-	 
-	    
-	    
+					 		
+						$.ajax( 
+								{
+									url : "/product/json/getProduct/"+prodNo+"/${param.menu}",
+									method : "GET" ,
+									dataType : "json" ,
+									headers : {
+										"Accept" : "application/json",
+										"Content-Type" : "application/json"
+									},
+									
+									success : function(JSONData , status) {
+		
+										var displayValue = "<h3>"
+																	+"상품번호 : "+JSONData.prodNo+"<br/>"
+																	+"상품명 : "+JSONData.prodName+"<br/>"
+																	+"상품이미지 : "+JSONData.fileName+"<br/>"
+																	+"상세정보 : "+JSONData.prodDetail+"<br/>"
+																	+"제조일자 : "+JSONData.manuDate+"<br/>"
+																	+"가격 : "+JSONData.price+"<br/>"
+																	+"등록일자 : "+JSONData.regDate+"<br/>"
+																	+"<input type='button' value='"+value+"' id='del'/>"+"<br/>"  
+																	+"</h3>";
+									
+									
+										$("h3").remove();
+										 $("#"+prodNo+"").html(displayValue);
+										 
+											$(function(){
+												$("#del").on("click",function(){
+													console.log("구매붤튼... : " +$(this).html() );
+													self.location="/product/getProduct?prodNo="+prodNo+"&menu=${param.menu}";
+													
+												});
+											});
+										 
+									
+									}
+							});
+				 });
+				 });
+			  
+		 
 	 $(function(){
 	 	 $(".ct_list_pop:contains('상품배송하기')").on("click",function(){
 	 		 self.location="/purchase/updateTranCode"+$('#tran',this).text().trim();
