@@ -16,6 +16,8 @@ public interface ProductService {
 	public void updateProduct(Product product) throws Exception;
 	
 	public int removeProduct(int prodNo) throws Exception;
+	
+	public void updateReply(Product product) throws Exception;
 
 	
 	

@@ -16,7 +16,16 @@
 		<result property="regDate" column="REG_DATE" jdbcType="DATE" />
 		<result property="prodName" column="PROD_NAME" jdbcType="VARCHAR" />
 		<result property="proTranCode" column="TRAN_STATUS_CODE" jdbcType="CHAR" />
+		<result property="reply" column="reply" jdbcType="VARCHAR" />
 	</resultMap>
+	
+	<update id="updateReply" parameterType="product">
+		UPDATE product
+		<set>
+			reply = #{reply:VARCHAR}
+		</set>
+		WHERE prod_No =#{prodNo}
+	</update>
 
 	<insert id="addProduct" parameterType="product">
 		INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date)
@@ -79,7 +88,7 @@
 											<if test="searchCondition != null">
 												
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 		 	AND prod_no LIKE %${searchKeyword}%
+										 		 	AND p.prod_no LIKE '%${searchKeyword}%'
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
 										 			AND prod_name LIKE '%${searchKeyword}%'

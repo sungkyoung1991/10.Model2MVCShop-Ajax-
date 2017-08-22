@@ -19,6 +19,8 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	@Qualifier("productDaoImpl")
 	ProductDao productDao;
+	
+	
 
 	public void setProductDao(ProductDao productDao) {
 		System.out.println("::" + getClass() + ".setProductDao Call...");
@@ -77,6 +79,14 @@ public class ProductServiceImpl implements ProductService {
 	public int removeProduct(int prodNo) throws Exception {
 		// TODO Auto-generated method stub
 		return productDao.removeProduct(prodNo);
+	}
+
+	@Override
+	public void updateReply(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		
+		productDao.updateReply(product);
+		
 	}
 
 }

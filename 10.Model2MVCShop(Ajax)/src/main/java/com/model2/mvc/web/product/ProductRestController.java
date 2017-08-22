@@ -3,6 +3,8 @@ package com.model2.mvc.web.product;
 import java.io.File;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
@@ -38,6 +39,24 @@ public class ProductRestController {
 
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	
+	@RequestMapping(value="json/productReply/{prodNo}", method=RequestMethod.POST)
+	public Product productReply(@RequestBody Product product, @PathVariable int prodNo) throws Exception{
+		
+		System.out.println("reply start..............................");
+		System.out.println("prodNo........" + prodNo);
+		System.out.println("product........" + product);
+		System.out.println();
+		
+		Product returnProduct = productService.getProduct(prodNo);
+		
+		returnProduct.setReply(product.getReply());
+		
+		productService.updateReply(returnProduct);
+		
+		return returnProduct;
+		
+	}
 
 	@RequestMapping(value = "json/addProduct", method = RequestMethod.POST)
 	public Product addProduct(@RequestBody Product product, @RequestParam("file") MultipartFile file) throws Exception{

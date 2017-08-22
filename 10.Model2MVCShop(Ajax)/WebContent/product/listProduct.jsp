@@ -81,7 +81,7 @@
 					 		if(${param.menu=="manage"}){
 								value="상품수정";
 							}else{
-								value="구매";
+								value="상세보기";
 							}
 					 		
 						$.ajax( 
@@ -95,11 +95,17 @@
 									},
 									
 									success : function(JSONData , status) {
+										if(JSONData.fileName==null){
+											 JSONData.fileName="no.png";
+										 }
 		
 										var displayValue = "<h3>"
 																	+"상품번호 : "+JSONData.prodNo+"<br/>"
 																	+"상품명 : "+JSONData.prodName+"<br/>"
-																	+"상품이미지 : "+JSONData.fileName+"<br/>"
+																	+"상품이미지 :" + "<br/>"
+																	 
+																	+"<img src="+"../images/uploadFiles/"+JSONData.fileName+" width="+"200"+" height="+"200"+"/>"+"<br/>"
+																	
 																	+"상세정보 : "+JSONData.prodDetail+"<br/>"
 																	+"제조일자 : "+JSONData.manuDate+"<br/>"
 																	+"가격 : "+JSONData.price+"<br/>"
@@ -111,9 +117,13 @@
 										$("h3").remove();
 										 $("#"+prodNo+"").html(displayValue);
 										 
+										 if(JSONData.fileName==null){
+											 JSONData.fileName="no.png";
+										 }
+										 
 											$(function(){
 												$("#del").on("click",function(){
-													console.log("구매붤튼... : " +$(this).html() );
+													//console.log("구매붤튼... : " +$(this).html() );
 													self.location="/product/getProduct?prodNo="+prodNo+"&menu=${param.menu}";
 													
 												});

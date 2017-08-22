@@ -25,7 +25,44 @@
 				self.location="/product/listProduct?menu=${param.menu}";
 			});
 		});
+		
+	
+$(function(){ 
 
+		
+		/* $("form[name='replyForm'] input[type='button']").on("click",function(){ */
+			 $("input[type='button']").on("click",function(){ 
+				console.log("쓰기.."+ $(this).html());
+ 
+	 $.ajax(
+			 
+			 {
+				 url : "/product/json/productReply/"+${product.prodNo},
+				 method : "POST",
+				headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+							},
+				 data : JSON.stringify({
+					reply :  $("input[type='text']").val()
+				 }),
+				 dataType : "json",
+				 success : function(JSONData, status){
+					 alert(status);
+					 alert(JSONData);
+				 
+					 var display = 
+						"<div id = 'append'>"+
+						 "${user.userId} : "+ JSONData.reply + "\n"+
+						 "</div>";
+					 
+					 $(display).appendTo("body");
+					 
+				 }
+			});
+		});
+	}); 
+	
 
 
 </script>
@@ -69,7 +106,7 @@
 				<td class="ct_write01">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td width="105">${product.prodNo}</td>
+							<td width="105" id="prodNo">${product.prodNo}</td>
 						</tr>
 					</table>
 				</td>
@@ -169,7 +206,75 @@
 				</td>
 			</tr>
 		</table>
+		
+		
+		<table width="100%" height="37" border="0" cellpadding="0"
+			cellspacing="0">
+			<tr>
+				<td width="15" height="37"><img src="/images/IMG_3713.PNG"
+					width="250" height="170"></td>
+				<td  width="100%"
+					style="padding-left: 10px;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="93%" class="ct_ttl01">상품평</td>
+							<td width="20%" align="right">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td width="30" height="37"><img src="/images/ct_ttl_img03.gif"
+					width="12" height="37" /></td>
+			</tr>
+		</table>
+		
+		<input type = "text" name="reply" style="width: 800px; height: 30px" placeholder="댓글을입력해주세요.">
+		
+		<br/>
+	
+		<!-- <input type="button" value="쓰기" /> -->
+		<input type="button" value="쓰기" />
+		
 	</form>
+	
+	
+	<!-- 
+	<form name="replyForm">
+
+		<table width="100%" height="37" border="0" cellpadding="0"
+			cellspacing="0">
+			<tr>
+				<td width="15" height="37"><img src="/images/IMG_3713.PNG"
+					width="15" height="37"></td>
+				<td  width="100%"
+					style="padding-left: 10px;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="93%" class="ct_ttl01">상품평</td>
+							<td width="20%" align="right">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td width="12" height="37"><img src="/images/ct_ttl_img03.gif"
+					width="12" height="37" /></td>
+			</tr>
+		</table>
+		
+
+	
+		
+	
+	
+		<input type = "text" name="reply" style="width: 800px; height: 19px"/></br>
+	
+		<input type="button" value="쓰기" />
+		
+	
+
+		
+		
+		</form> -->
+	
+	
 
 </body>
 </html>

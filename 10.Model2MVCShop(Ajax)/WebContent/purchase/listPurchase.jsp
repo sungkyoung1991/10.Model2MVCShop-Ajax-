@@ -95,8 +95,8 @@
 	
 	<tr class="ct_list_pop">
 		<td align="center" id="prodNo">${purchase.purchaseProd.prodNo}</td>
-		<td align="left"></td>
-		<td>${purchase.purchaseProd.prodName }</td>
+		<td align="center"></td>
+		<td align="center">${purchase.purchaseProd.prodName }</td>
 		<td align="left"></td>
 		<td>${purchase.divyAddr }</td>
 		<td align="left"></td>

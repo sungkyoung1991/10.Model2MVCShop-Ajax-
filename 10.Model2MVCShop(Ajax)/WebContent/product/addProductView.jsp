@@ -66,6 +66,16 @@ $(function(){
 	});
 });
 
+$(function(){
+	$("img[src='../images/ct_icon_date.gif']").on("click",function(){
+		/* popWin = show_calendar($('#manuDate'), $('#manuDate').val()),"popWin"); */
+		popWin = window.open(show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value),
+		"popWin");
+	
+	});
+});
+	
+
 </script>
 </head>
 
@@ -136,7 +146,7 @@ $(function(){
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input type="text" name="manuDate" readonly="readonly" class="ct_input_g"  
+			<input type="text" name="manuDate" id="manuDate" readonly="readonly" class="ct_input_g"  
 						style="width: 100px; height: 19px"	maxLength="10" minLength="6"/>
 				&nbsp;<img src="../images/ct_icon_date.gif" width="15" height="15" 
 										onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>

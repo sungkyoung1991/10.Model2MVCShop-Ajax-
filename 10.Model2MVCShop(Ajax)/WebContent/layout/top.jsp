@@ -7,6 +7,7 @@
 <html>
 
 <head>
+
 	<meta charset="EUC-KR">
 	
 	<title>Model2 MVC Shop</title>
@@ -37,7 +38,13 @@
 				$(window.parent.document.location).attr("href","/user/logout");
 			}); 
 		});	
-		 
+		
+		/* $(function(){
+			$("td[width='800']:contains('Model2 MVC Shop')").on("click",function(){
+				self.location="/user/login"
+			});
+		});
+		  */
 	</script>		
 	
 </head>

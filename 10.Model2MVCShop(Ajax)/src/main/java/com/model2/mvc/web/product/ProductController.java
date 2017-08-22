@@ -1,6 +1,8 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +45,7 @@ public class ProductController {
 	@Value("#{commonProperties['pageSize']}")
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
-
+	
 	
 	@RequestMapping(value = "addProduct", method = RequestMethod.POST)
 	public ModelAndView addProduct(@ModelAttribute("product") Product product, 
