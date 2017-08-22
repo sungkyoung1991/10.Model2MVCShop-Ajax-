@@ -46,7 +46,7 @@ public class ProductRestController {
 		System.out.println("reply start..............................");
 		System.out.println("prodNo........" + prodNo);
 		System.out.println("product........" + product);
-		System.out.println();
+		System.out.println("ch");
 		
 		Product returnProduct = productService.getProduct(prodNo);
 		
