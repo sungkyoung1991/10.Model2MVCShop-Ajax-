@@ -49,6 +49,7 @@ public class ProductRestController {
 	
 		
 		List<Product> list = new ArrayList<Product>();
+		System.out.println("ch");
 		
 		Product returnProduct = productService.getProduct(prodNo);
 		
