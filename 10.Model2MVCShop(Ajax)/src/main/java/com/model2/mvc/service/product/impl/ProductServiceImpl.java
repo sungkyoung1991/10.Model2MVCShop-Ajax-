@@ -1,5 +1,6 @@
 package com.model2.mvc.service.product.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -82,10 +83,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void updateReply(Product product) throws Exception {
+	public List<Product> updateReply(Product product) throws Exception {
 		// TODO Auto-generated method stub
 		
-		productDao.updateReply(product);
+		List<Product> list = new ArrayList<Product>();
+		
+		list.add(product);
+		
+		return list;
 		
 	}
 

@@ -7,7 +7,7 @@ import java.util.List;
 public class Product {
 	
 	
-	private String reply;
+	private List<Product> reply;
 	
 	
 
@@ -37,14 +37,15 @@ public class Product {
 		
 	}
 	
-	public String getReply() {
+	public List<Product> getReply() {
 		return reply;
 	}
 
 
 
-	public void setReply(String reply) {
+	public void setReply(List<Product> reply) {
 		this.reply = reply;
+		
 	}
 
 

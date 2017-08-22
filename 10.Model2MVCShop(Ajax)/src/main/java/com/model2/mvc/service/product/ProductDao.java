@@ -22,7 +22,7 @@ public interface ProductDao {
 	
 	public int getTotalCount(Search search) throws Exception ;
 
-	public void updateReply(Product product);
+	public List<Product> updateReply(Product product);
 	
 
 }

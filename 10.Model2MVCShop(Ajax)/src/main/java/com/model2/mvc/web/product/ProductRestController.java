@@ -1,9 +1,9 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,12 +41,14 @@ public class ProductRestController {
 	int pageSize;
 	
 	@RequestMapping(value="json/productReply/{prodNo}", method=RequestMethod.POST)
-	public Product productReply(@RequestBody Product product, @PathVariable int prodNo) throws Exception{
+	public List<Product> productReply(@RequestBody Product product, @PathVariable int prodNo) throws Exception{
 		
 		System.out.println("reply start..............................");
 		System.out.println("prodNo........" + prodNo);
 		System.out.println("product........" + product);
-		System.out.println();
+	
+		
+		List<Product> list = new ArrayList<Product>();
 		
 		Product returnProduct = productService.getProduct(prodNo);
 		
@@ -54,7 +56,11 @@ public class ProductRestController {
 		
 		productService.updateReply(returnProduct);
 		
-		return returnProduct;
+		list.add(returnProduct);
+		
+		System.out.println("list..........." + list);
+		
+		return list;
 		
 	}
 
