@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="ReplyMapper">
+
+	<resultMap id="replySelectMap" type="reply">
+		<result property="prodNo" column="PROD_NO" jdbcType="INTEGER" />
+		<result property="reply" column="reply" jdbcType="VARCHAR" javaType="list" />
+		<!--javaType="LIST"  -->
+	</resultMap>
+	
+	<update id="updateReply" parameterType="reply">
+		UPDATE prod_reply
+		<set>
+			reply = #{reply:VARCHAR},
+			prod_no=#{prodNo:INTEGER}
+		</set>
+	</update>
+	
+		<!-- <select  id="getReplyList"  parameterType="reply">
+		SELECT pr.prod_no, pr.reply
+	  										 FROM prod_reply pr, product p
+	  										 	WHERE pr.prod_no = p.prod_no(+)
+	  										 	And pr.prod_no=#{prodNo:INTEGER}
+											ORDER BY prod_no
+	 </select>
+	  -->
+	 
+	 
+	<insert id="insertReply" parameterType="reply">
+		INSERT INTO prod_reply (prod_no, reply)
+		VALUES (
+		#{prodNo:INTEGER},
+		#{reply:VARCHAR}
+		)
+	</insert>
+	
+
+	
+</mapper>	
+			
+		
