@@ -31,8 +31,8 @@
 	 $(function(){
 			$("img[src='../images/ct_icon_date.gif']").on("click",function(){
 				console.log("Å¬¸¯ÇÔ"+$(this).html());
-				popWin = show_calendar($('#divyDate'), $('#divyDate').val()),
-				"popWin");
+				popWin = show_calendar($('#divyDate'), $('#divyDate').val(),
+				"popWin")
 						
 				});
 			});

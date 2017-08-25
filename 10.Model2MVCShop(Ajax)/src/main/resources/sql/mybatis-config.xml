@@ -17,14 +17,21 @@
 		<typeAlias alias="user" type="com.model2.mvc.service.domain.User" />
 		<typeAlias alias="product" type="com.model2.mvc.service.domain.Product" />
 		<typeAlias alias="purchase" type="com.model2.mvc.service.domain.Purchase" />
+		<typeAlias alias="reply" type="com.model2.mvc.service.domain.Reply" />
 		<typeAlias alias="search" type="com.model2.mvc.common.Search" />
 	</typeAliases>
+	
+	<typeHandlers>
+		<typeHandler handler="com.model2.mvc.common.ListTypeHandler" javaType = "java.util.List" jdbcType="VARCHAR"/>
+	</typeHandlers>
+	
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
 		<mapper resource="sql/UserMapper.xml"/>
 		<mapper resource="sql/ProductMapper.xml"/>
 		<mapper resource="sql/PurchaseMapper.xml"/>
+		<mapper resource="sql/ReplyMapper.xml"/>
 	</mappers>
 
 </configuration>

@@ -26,44 +26,136 @@
 			});
 		});
 		
-	
-$(function(){ 
 
-		
-		/* $("form[name='replyForm'] input[type='button']").on("click",function(){ */
+	/* 	$(function(){
+			$("#reply").on("click",function(){
+			
+				$.ajax(
+						{
+				
+					url : "/reply/json/getReplyList",
+					method : "POST",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+							},
+							
+					data : JSON.stringify({
+						
+					
+						prodNo : "${product.prodNo}"
+					
+						}),
+					
+				 	dataType : "json",
+					success : function(JSONData, status){
+							  alert(status);
+							  alert(JSONData);
+							  
+							  var displayValue = "<h3>"
+									+JSONData.reply+"<br/>"
+									+"<input type='text' style='width: 800px; height: 30px'  placeholder='댓글을 입력하세요.' />"+"<br/>"
+									+"<input type='button' id='insert' value='작성하기'/>"+"<br/>"
+									+"</h3>";
+									
+							  $(displayValue).appendTo("body");
+							$(function(){
+								$("#add").on("click",function(){
+									console.log("추가... : " +$(this).html() );
+									self.location="/reply/json/updateReply";
+									
+								});
+							});
+					}
+						});
+		});
+		}); */
+	
+   $(function(){ 
 			 $("input[type='button']").on("click",function(){ 
 				console.log("쓰기.."+ $(this).html());
- 
 	 $.ajax(
 			 
 			 {
-				 url : "/product/json/productReply/"+${product.prodNo},
+				 url : "/reply/json/insertReply",
 				 method : "POST",
 				headers : {
 						"Accept" : "application/json",
 						"Content-Type" : "application/json"
 							},
 				 data : JSON.stringify({
-					reply :  $("input[type='text']").val()
+					reply :  [$("input[type='text']").val()],
+					 prodNo : ${product.prodNo}
 				 }),
 				 dataType : "json",
 				 success : function(JSONData, status){
-					 alert(status);
-					 alert(JSONData);
+					  alert(status);
+					 alert(JSONData); 
 				 
 					 var display = 
 						"<div id = 'append'>"+
-						 "${user.userId} : "+ JSONData.reply + "\n"+
+						 JSONData.prodNo + ":" + JSONData.reply + "\n"+
 						 "</div>";
+						 
+					var div = "<h1>" + JSONData.reply + "</h1>";
 					 
 					 $(display).appendTo("body");
 					 
 				 }
 			});
+	 
+	 $("input[type='text']").val("댓글을입력해주세요");
+	 
+
+	 
 		});
 	}); 
-	
-
+	  
+ 
+ /* 
+ $(function(){
+	 $("input[type='button']").on("click",function(){
+		 
+		 $.ajax(
+				 {
+					url : "/reply/json/insertReply",
+					method : "POST",
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					
+					data : JSON.stringify({
+						reply :  $("input[type='text']").val(),
+						prodNo : ${product.prodNo}
+					}),
+					
+					dataType : "json",
+					success : function(JSONData, status){
+						  alert(status);
+						 alert(JSONData); 
+					 
+						  
+						  var displayValue = "<h3>"
+								+JSONData.reply+"<br/>"
+								+"<input type='text' style='width: 800px; height: 30px'  placeholder='댓글을 입력하세요.' />"+"<br/>"
+								+"<input type='button' id='insert' value='작성하기'/>"+"<br/>"
+								+"</h3>";
+							 
+						 $(display).appendTo("body"); */
+	/* 		 }
+		});
+	 });
+ });
+  */
+  
+  
+/*   $(function(){
+	  $("input[type='button']").on("click",function(){
+		  console.log("쓰기"+$(this).html());
+		  $('form').attr("method","POST").attr("action","/reply/insertReply/"+${product.prodNo}).submit();
+	  });
+  }); */
 
 </script>
 <title>Insert title here</title>
@@ -207,12 +299,13 @@ $(function(){
 			</tr>
 		</table>
 		
+		<!-- <input type="button" id="reply" value="상품평보기"/> -->
 		
 		<table width="100%" height="37" border="0" cellpadding="0"
 			cellspacing="0">
 			<tr>
 				<td width="15" height="37"><img src="/images/IMG_3713.PNG"
-					width="250" height="170"></td>
+					width="15" height="37"></td>
 				<td  width="100%"
 					style="padding-left: 10px;">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -231,48 +324,21 @@ $(function(){
 		
 		<br/>
 	
-		<!-- <input type="button" value="쓰기" /> -->
-		<input type="button" value="쓰기" />
+		<input type="button" value="쓰기" /><br/><hr/><br/>
 		
-	</form>
-	
-	
-	<!-- 
-	<form name="replyForm">
-
-		<table width="100%" height="37" border="0" cellpadding="0"
-			cellspacing="0">
+		<table>
 			<tr>
-				<td width="15" height="37"><img src="/images/IMG_3713.PNG"
-					width="15" height="37"></td>
-				<td  width="100%"
-					style="padding-left: 10px;">
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="93%" class="ct_ttl01">상품평</td>
-							<td width="20%" align="right">&nbsp;</td>
-						</tr>
-					</table>
-				</td>
-				<td width="12" height="37"><img src="/images/ct_ttl_img03.gif"
-					width="12" height="37" /></td>
+	<%-- <c:forEach var="reply" items="${list.reply }"> --%>
+			<%-- <td> ${reply.reply}</td> --%>
+			<%-- </c:forEach> --%>
 			</tr>
+			
+			
 		</table>
 		
-
-	
-		
-	
-	
-		<input type = "text" name="reply" style="width: 800px; height: 19px"/></br>
-	
-		<input type="button" value="쓰기" />
-		
-	
-
 		
 		
-		</form> -->
+	</form>
 	
 	
 

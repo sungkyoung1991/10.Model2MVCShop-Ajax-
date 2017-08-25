@@ -1,9 +1,9 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
+import com.model2.mvc.service.domain.Reply;
 import com.model2.mvc.service.product.ProductService;
+import com.model2.mvc.service.reply.ReplyService;
 
 @RestController
 @RequestMapping("/product/*")
@@ -29,6 +31,10 @@ public class ProductRestController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
+	
+//	@Autowired
+//	@Qualifier("replyServiceImpl")
+//	private ReplyService replyService;
 
 	public ProductRestController() {
 		System.out.println(this.getClass());
@@ -40,23 +46,44 @@ public class ProductRestController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	@RequestMapping(value="json/productReply/{prodNo}", method=RequestMethod.POST)
-	public Product productReply(@RequestBody Product product, @PathVariable int prodNo) throws Exception{
-		
-		System.out.println("reply start..............................");
-		System.out.println("prodNo........" + prodNo);
-		System.out.println("product........" + product);
-		System.out.println("ch");
-		
-		Product returnProduct = productService.getProduct(prodNo);
-		
-		returnProduct.setReply(product.getReply());
-		
-		productService.updateReply(returnProduct);
-		
-		return returnProduct;
-		
-	}
+//	@RequestMapping(value = "json/addReply", method = RequestMethod.POST)
+//	public List<Reply> addReply(@RequestBody Reply reply) throws Exception {
+//
+//		System.out.println("/addReply");
+//		
+//		Product product = new Product();
+//		product.setReply(reply);
+//		
+//		replyService.insertReply(reply);
+//		
+//		List<Reply> list = new ArrayList<Reply>();
+//		
+//		list.add(reply);
+//		
+//			
+//		return list;
+//			
+//		
+//	}
+
+	
+//	@RequestMapping(value="json/productReply/{prodNo}", method=RequestMethod.POST)
+//	public Product productReply(@RequestBody Product product, @PathVariable int prodNo) throws Exception{
+//		
+//		System.out.println("reply start..............................");
+//		System.out.println("prodNo........" + prodNo);
+//		System.out.println("product........" + product);
+//		System.out.println("ch");
+//		
+//		Product returnProduct = productService.getProduct(prodNo);
+//		
+//		returnProduct.setReply(product.getReply());
+//		
+//		productService.updateReply(returnProduct);
+//		
+//		return returnProduct;
+//		
+//	}
 
 	@RequestMapping(value = "json/addProduct", method = RequestMethod.POST)
 	public Product addProduct(@RequestBody Product product, @RequestParam("file") MultipartFile file) throws Exception{
