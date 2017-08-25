@@ -1,13 +1,12 @@
 package com.model2.mvc.service.domain;
 
 import java.sql.Date;
-import java.util.List;
 
 
 public class Product {
 	
 	
-	private String reply;
+	private Reply reply;
 	
 	
 
@@ -37,13 +36,13 @@ public class Product {
 		
 	}
 	
-	public String getReply() {
+	public Reply getReply() {
 		return reply;
 	}
 
 
 
-	public void setReply(String reply) {
+	public void setReply(Reply reply) {
 		this.reply = reply;
 	}
 

@@ -1,8 +1,6 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +18,7 @@ import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
+import com.model2.mvc.service.reply.ReplyService;
 
 //==> ȸ������ Controller
 @Controller
@@ -32,6 +30,10 @@ public class ProductController {
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
 	// setter Method ���� ����
+	
+	@Autowired
+	@Qualifier("replyServiceImpl")
+	private ReplyService replyService;
 
 	public ProductController() {
 		System.out.println(this.getClass());
@@ -45,7 +47,6 @@ public class ProductController {
 	@Value("#{commonProperties['pageSize']}")
 	// @Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
-	
 	
 	@RequestMapping(value = "addProduct", method = RequestMethod.POST)
 	public ModelAndView addProduct(@ModelAttribute("product") Product product, 
@@ -86,7 +87,7 @@ public class ProductController {
 		// Business Logic
 
 		Product product = productService.getProduct(prodNo);
-
+		
 		System.out.println("Controller Product Check : " + product);
 		System.out.println("menu check : " + menu);
 

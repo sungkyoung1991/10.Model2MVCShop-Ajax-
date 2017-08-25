@@ -16,18 +16,16 @@
 		<result property="regDate" column="REG_DATE" jdbcType="DATE" />
 		<result property="prodName" column="PROD_NAME" jdbcType="VARCHAR" />
 		<result property="proTranCode" column="TRAN_STATUS_CODE" jdbcType="CHAR" />
-		<result property="reply" column="reply" jdbcType="VARCHAR" />
-	</resultMap>
+		<result property="reply.reply" column="reply" jdbcType="VARCHAR" javaType="list" />
+		<result property="reply.prodNo" column="prod_no" jdbcType="INTEGER" />
 	
-	<update id="updateReply" parameterType="product">
-		UPDATE product
-		<set>
-			reply = #{reply:VARCHAR}
-		</set>
-		WHERE prod_No =#{prodNo}
-	</update>
+ 	<association property="reply" javaType="reply">
+		<id property="reply" column="reply" jdbcType="VARCHAR" javaType="list"/>
+		<id property="prodNo" column="PROD_NO" jdbcType="INTEGER" />
+	</association>
+</resultMap>
 
-	<insert id="addProduct" parameterType="product">
+	<insert id="addProduct" parameterType="product" >
 		INSERT INTO product (prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date)
 		VALUES (
 		
@@ -43,9 +41,9 @@
 
 
 
-	<select id="getProduct" parameterType="int" resultMap="productSelectMap">
+	<select id="getProduct" parameterType="int" resultMap="productSelectMap" >
 		SELECT * FROM product
-		WHERE prod_no=#{value}
+		WHERE prod_no=#{prodNo}
 	</select>
 
 	<update id="updateProduct" parameterType="product">
